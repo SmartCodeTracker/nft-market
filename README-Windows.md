@@ -19,7 +19,7 @@ If you're using Gitpod, you can skip this step.
 Explore this contract
 =====================
 
-The source for this contract is in `nft/lib.rs`. It provides methods to manage access to tokens, transfer tokens, check access, and get token owner. Note, some further exploration inside the rust macros is needed to see how the `NonFungibleToken` contract is implemented.
+The source for this contract is in `nft/src/lib.rs`. It provides methods to manage access to tokens, transfer tokens, check access, and get token owner. Note, some further exploration inside the rust macros is needed to see how the `NonFungibleToken` contract is implemented.
 
 Building this contract
 ======================
@@ -30,11 +30,11 @@ build.bat
 
 Testing this contract
 =====================
-We have some tests that can be ran. The following will just run our simple tests to verify that our contract code is working.
+We have some tests that you can run. For example, the following will run our simple tests to verify that our contract code is working.
 ```bash
 cargo test -- --nocapture
 ```
-The more complex simulation tests aren't ran with this command, but we can find them in `tests/sim`.
+The more complex simulation tests aren't run with this command, but we can find them in `tests/sim`.
 
 Using this contract
 ===================
@@ -57,7 +57,7 @@ Now we can deploy the compiled contract in this example to your account:
 
     near deploy --wasmFile res/non_fungible_token.wasm --accountId %ID%
 
-NFT contract should be initialized before usage. More info about the metadata at ['nomicon.io'](https://nomicon.io/Standards/NonFungibleToken/Metadata.html). But for now, we'll initialize with the default metadata.
+NFT contract should be initialized before usage. More info about the metadata at [nomicon.io](https://nomicon.io/Standards/NonFungibleToken/Metadata.html). But for now, we'll initialize with the default metadata.
 
     near call %ID% new_default_meta "{\"owner_id\": \""%ID%"\"}" --accountId %ID%
 
@@ -67,7 +67,7 @@ We'll be able to view our metadata right after:
 
 Then, let's mint our first token. This will create a NFT based on Olympus Mons where only one copy exists:
 
-    near call %ID% nft_mint "{\"token_id\": \"0\", \"receiver_id\": \""%ID%"\", \"token_metadata\": { \"title\": \"Olympus Mons\", \"description\": \"Tallest mountain in charted solar system\", \"copies\": 1}}' --accountId %ID% --deposit 10
+    near call %ID% nft_mint "{\"token_id\": \"0\", \"token_owner_id\": \""%ID%"\", \"token_metadata\": { \"title\": \"Olympus Mons\", \"description\": \"Tallest mountain in charted solar system\", \"copies\": 1}}' --accountId %ID% --deposit 10
 
 Transferring our NFT
 ====================
